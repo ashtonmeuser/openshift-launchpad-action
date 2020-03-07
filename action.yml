@@ -1,16 +1,12 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: Hello World
+description: Greet someone and record the time
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  OPENSHIFT_AUTH_TOKEN_TEST:  # id of input
+    description: OpenShift service account token
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: docker
+  image: Dockerfile
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.OPENSHIFT_AUTH_TOKEN_TEST }}
