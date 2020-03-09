@@ -2,6 +2,8 @@
 
 echo "$GITHUB_REPOSITORY"
 
+echo $(which oc)
+
 oc login https://console.pathfinder.gov.bc.ca:8443 --token="$1"
 
 echo $(oc project)
