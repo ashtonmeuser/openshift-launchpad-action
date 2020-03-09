@@ -5,8 +5,20 @@ inputs:
   OPENSHIFT_AUTH_TOKEN_TEST:  # id of input
     description: OpenShift service account token
     required: true
+  NAMESPACE:
+    description: OpenShift project namespace
+    required: true
+  APP_NAME:
+    description: OpenShift app name label
+    required: true
 runs:
   using: docker
   image: Dockerfile
+  env:
+    OPENSHIFT_AUTH_TOKEN_TEST: ${{ inputs.OPENSHIFT_AUTH_TOKEN_TEST }}
+    NAMESPACE: ${{ inputs.NAMESPACE }}
+    APP_NAME: ${{ inputs.APP_NAME }}
   args:
     - ${{ inputs.OPENSHIFT_AUTH_TOKEN_TEST }}
+    - ${{ inputs.NAMESPACE }}
+    - ${{ inputs.APP_NAME }}

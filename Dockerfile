@@ -1,5 +1,7 @@
 FROM widerin/openshift-cli:v4.5
 
-COPY entrypoint.sh /entrypoint.sh
+RUN apk add make
+
+COPY . .
 
 ENTRYPOINT ["/entrypoint.sh"]
