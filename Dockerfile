@@ -4,6 +4,4 @@ RUN apk add make
 
 COPY . .
 
-WORKDIR /
-
 ENTRYPOINT ["/entrypoint.sh"]
