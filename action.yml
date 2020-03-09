@@ -2,6 +2,9 @@
 name: Hello World
 description: Greet someone and record the time
 inputs:
+  MODE:
+    description: Type of app, either "client" or "server"
+    required: true
   OPENSHIFT_AUTH_TOKEN_TEST:
     description: OpenShift service account token
     required: true
@@ -11,11 +14,15 @@ inputs:
   APP_NAME:
     description: OpenShift app name label
     required: true
+  API_URL:
+    description: URL of app server
+    required: false
 runs:
   using: docker
   image: Dockerfile
   env:
+    MODE: ${{ inputs.MODE }}
+    OPENSHIFT_AUTH_TOKEN_TEST: ${{ inputs.OPENSHIFT_AUTH_TOKEN_TEST }}
     NAMESPACE: ${{ inputs.NAMESPACE }}
     APP_NAME: ${{ inputs.APP_NAME }}
-  args:
-    - ${{ inputs.OPENSHIFT_AUTH_TOKEN_TEST }}
+    API_URL: ${{ inputs.API_URL }}

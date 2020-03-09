@@ -1,13 +1,20 @@
 #!/bin/sh -l
 
-echo "$APP_NAME"
-
 cd /
 
-oc login https://console.pathfinder.gov.bc.ca:8443 --token="$1" # Login to cluster
+oc login https://console.pathfinder.gov.bc.ca:8443 --token="$OPENSHIFT_AUTH_TOKEN_TEST" # Login to cluster
 
-echo $(pwd)
+case "$MODE" in
+  "server")
+    make create-server NAMESPACE="$NAMESPACE" APP_NAME="$APP_NAME" REPO="https://github.com/$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
+    ;;
+  "client")
+    make create-client NAMESPACE="$NAMESPACE" APP_NAME="$APP_NAME" API_URL="$API_URL" REPO="https://github.com/$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
+    ;;
+  *)
+    echo "Must specify MODE as either client or server"
+    exit 1
+    ;;
+esac
 
-make create-server NAMESPACE="$NAMESPACE" APP_NAME="$APP_NAME" REPO="https://github.com/$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
-
-# exit 1 # Ensure job fails so we can re-run GH Action
+exit 1 # Ensure job fails so we can re-run GH Action
