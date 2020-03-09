@@ -7,10 +7,12 @@
 
 echo "$APP_NAME"
 
+cd /
+
 oc login https://console.pathfinder.gov.bc.ca:8443 --token="$1" # Login to cluster
 
 echo $(pwd)
 
-make -f /Makefile create-server NAMESPACE="$2" APP_NAME="$3"-test REPO="$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
+make create-server NAMESPACE="$2" APP_NAME="$3"-test REPO="$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
 
 exit 1 # Ensure job fails so we can re-run GH Action
