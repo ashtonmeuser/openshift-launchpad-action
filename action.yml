@@ -2,7 +2,7 @@
 name: Hello World
 description: Greet someone and record the time
 inputs:
-  OPENSHIFT_AUTH_TOKEN_TEST:  # id of input
+  OPENSHIFT_AUTH_TOKEN_TEST:
     description: OpenShift service account token
     required: true
   NAMESPACE:
