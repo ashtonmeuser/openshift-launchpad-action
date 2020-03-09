@@ -2,10 +2,8 @@ FROM widerin/openshift-cli:v4.5
 
 RUN apk add make
 
-RUN pwd
+COPY . .
 
-COPY entrypoint.sh /entrypoint.sh
-COPY Makefile /Makefile
-COPY openshift/. /openshift/
+WORKDIR /
 
 ENTRYPOINT ["/entrypoint.sh"]
