@@ -15,4 +15,4 @@ echo $(pwd)
 
 make create-server NAMESPACE="$2" APP_NAME="$3" REPO="https://github.com/$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
 
-exit 1 # Ensure job fails so we can re-run GH Action
+# exit 1 # Ensure job fails so we can re-run GH Action
