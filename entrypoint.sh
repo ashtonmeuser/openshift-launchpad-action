@@ -4,6 +4,12 @@ cd /
 
 oc login https://console.pathfinder.gov.bc.ca:8443 --token="$OPENSHIFT_AUTH_TOKEN_TEST" # Login to cluster
 
+make oc-all-clean NAMESPACE=$NAMESPACE APP_NAME=$APP_NAME
+make oc-persisted-clean NAMESPACE=$NAMESPACE APP_NAME=$APP_NAME
+
+make create-nsp NAMESPACE=$NAMESPACE APP_NAME=$APP_NAME
+sleep 30s
+
 case "$MODE" in
   "server")
     make create-server NAMESPACE="$NAMESPACE" APP_NAME="$APP_NAME" REPO="https://github.com/$GITHUB_REPOSITORY" BRANCH=master IMAGE_TAG=latest
