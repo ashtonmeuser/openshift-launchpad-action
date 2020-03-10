@@ -1,12 +1,11 @@
-# action.yml
-name: Hello World
-description: Greet someone and record the time
+name: Deploy to OpenShift
+description: Deploy Dockerized application to OpenShift choosing from predefined config templates
 inputs:
   MODE:
     description: Type of app, either "client" or "server"
     required: true
-  OPENSHIFT_AUTH_TOKEN_TEST:
-    description: OpenShift service account token
+  AUTH_TOKEN:
+    description: OpenShift service account authorization token
     required: true
   NAMESPACE:
     description: OpenShift project namespace
@@ -22,7 +21,7 @@ runs:
   image: Dockerfile
   env:
     MODE: ${{ inputs.MODE }}
-    OPENSHIFT_AUTH_TOKEN_TEST: ${{ inputs.OPENSHIFT_AUTH_TOKEN_TEST }}
+    AUTH_TOKEN: ${{ inputs.AUTH_TOKEN }}
     NAMESPACE: ${{ inputs.NAMESPACE }}
     APP_NAME: ${{ inputs.APP_NAME }}
     API_URL: ${{ inputs.API_URL }}
